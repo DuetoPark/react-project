@@ -2,11 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import TodoList from './Todo/TodoList';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    바보똥
+    <BrowserRouter>
+    <Link to='/todo'><li>투두 리스트</li></Link>
+      <Routes>
+        <Route path='/todo' element={<TodoList/>}></Route>
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
