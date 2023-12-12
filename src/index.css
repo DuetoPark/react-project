@@ -5,3 +5,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  --color-purple: #b300ff;
+  --color-purple-dark: #8e00ca;
+
+  --color-yellow: #ffc897;
+  --color-yellow-dark: #ff8f2e;
+
+  --color-blue: #3257ff;
+  --color-blue-dark: #133fff;
+
+  --color-green: #00ffc3;
+  --color-green-dark: #00deaa;
+}
