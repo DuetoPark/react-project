@@ -1,0 +1,11 @@
+.task {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  padding: 8px 0;
+}
+
+.content {
+  background-color: #fff;
+  flex-grow: 1;
+}

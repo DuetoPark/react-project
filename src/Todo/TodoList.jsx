@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
+import '../../src/assets/css/Todo/todo.css';
+import FilterBtn from './Component/FilterBtn';
+import Task from './Component/Task';
+import todoReducer from '../Reducer/todoReducer';
 
 export default function TodoList() {
   /**
@@ -9,158 +13,86 @@ export default function TodoList() {
    * 할일 리스트 - 내용, 완료여부
    */
 
+  const _taskType = [
+    {type: 'all', text: '전체'},
+    {type: 'yet', text: '해야할 일'},
+    {type: 'done', text: '완료한 일'}
+  ];
+
   const [_darkMode, setDarkMode] = useState(false);
   const [_index, setIndex] = useState(1);
-  const [_toDoList, setToDoList] = useState([]);
   const [_filter, setFilter] = useState('all');
 
+  const [_toDoList, todoDispatch] = useReducer(todoReducer, []);
 
-  const setLocalStorage = () => {
-    // LocalStorage에 저장
-    window.localStorage.setItem('todo', JSON.stringify(_toDoList));
-    window.localStorage.setItem('index', _index);
-  };
-
-  const handleDone = (e) => {
-    const $doneBtn = e.currentTarget;
-    const _id = +$doneBtn.closest('.todo').id;
-
-    // _toDoList 변경
-    const _newList = [..._toDoList];
-    const _idx = _toDoList.findIndex(todo => todo.idx === _id);
-    _newList[_idx].isDone = $doneBtn.checked;
-
-    setToDoList(_newList);
-
-    setLocalStorage();
-  };
-
-  const handleDelete = (e) => {
-    const $deleteBtn = e.currentTarget;
-    const _id = +$deleteBtn.closest('.todo').id;
-
-    // _toDoList 변경
-    const _newList = [..._toDoList];
-    const _idx = _toDoList.findIndex(todo => todo.idx === _id);
-    _newList.splice(_idx, 1);
-
-    setToDoList(_newList);
-
-    setLocalStorage();
-  };
-
-  const handleSubmit = (e) => {
-    // submit 기본동작 제거
+  const handleAdd = (e) => {
     e.preventDefault();
 
-    
-    // _toDoList 변경
     const $todoInput = document.forms[0].querySelector('.todo-input');
     const _content = $todoInput.value;
 
-    if (_content.trim() == '') return;
+    if (_content.trim() === '') return;
 
+    // _idx 변경
     setIndex(prev => prev + 1);
-    setToDoList(prev => (
-      [
-        ...prev,
-        {
-          idx: _index,
-          content: _content,
-          isDone: false
-        }
-      ]
-    ));
+
+    // _toDoList 변경
+    todoDispatch({type: 'added', _id: _index, _content, _isDone: false});
 
     // .todo-input 초기화
     $todoInput.value = '';
-
-    setLocalStorage();
   };
 
-  const handleChange = (e) => {
-    const $todoContent = e.currentTarget;
-    const _id = +$todoContent.closest('.todo').id;
-  
-    // _toDoList 변경
-    const _newList = [..._toDoList];
-    const _idx = _toDoList.findIndex(todo => todo.idx === _id);
-    _newList[_idx].content = $todoContent.value;
-
-    setToDoList(_newList);
-
-    setLocalStorage();
-  };
-
-  const handleFilter = (e) => {
-    setFilter(e.currentTarget.dataset.value);
-  };
+  const handleReset = () => {
+    todoDispatch({type: 'reset'});
+    setIndex(1);
+  }
 
   useEffect(() => {
-    setToDoList(JSON.parse(window.localStorage.getItem('todo')));
-    setIndex(+window.localStorage.getItem('index'));
   }, []);
 
   return (
-    <div className={_darkMode ? 'dark-mode' : ''}>
-      <section>
-        <header>
-          <div>
-            <h1>멋쟁이들만 쓸 수 있는 오늘의 할 일</h1>
-          </div>
-          
-          <div>
-            <ul>
-              <li>
-                <button type='button' data-value='all' onClick={handleFilter}>전체</button>
-              </li>
-              <li>
-                <button type='button' data-value='yet' onClick={handleFilter}>해야할 일</button>
-              </li>
-              <li>
-                <button type='button' data-value='done' onClick={handleFilter}>한 일</button>
-              </li>
-            </ul>
-          </div>
+    <div className={_darkMode ? ' dark-mode' : ''}>
+      <section className='todo'>
+        <header className='todo-header'>
+          <h1 className='todo-title'>멋쟁이들만 쓸 수 있는 오늘의 할 일 🤔</h1>
 
-          <div>
-            <input type="checkbox" onChange={(e) => {setDarkMode(prev => !prev)}} />
-            {_darkMode ? '라이트모드' : '다크모드'}
-          </div>
-          <div>
-            <input type="checkbox" />
-            간편모드
+          <div className='control-group'>
+            <div className='left-box'>
+              {_taskType.map(_item => (
+                <FilterBtn filterData={_item} _selectValue={_filter}
+              setFilter={setFilter} />
+              ))}
+            </div>
+            
+            <div className='right-box'>
+              <label>
+                <input type="checkbox" onChange={(e) => {setDarkMode(prev => !prev)}} />
+                <span>{_darkMode ? '라이트모드' : '다크모드'}</span>
+              </label>
+              
+              <button type='button' onClick={handleReset}>초기화</button>
+            </div>
           </div>
         </header>
 
-        <div>
-          <ul>
-            {_toDoList
-            .filter(item => {
-              if (_filter === 'all') return true;
-              else if (_filter === 'yet' && !item.isDone) return true;
-              else if (_filter === 'done' && item.isDone) return true;
-            })
-            .map(item => (
-              <li key={item.idx}>
-                <article className='todo' id={item.idx}>
-                  <input type="text" className='todo-content' defaultValue={item.content} onChange={handleChange} />
-                  <div>
-                    <button type='button' className='todo-delete' onClick={handleDelete}>지우기</button>
-                    <input
-                      type='checkbox'
-                      defaultChecked={item.isDone}
-                      onChange={handleDone} />
-                    <span>{item.isDone ? '되돌리기' : '완료'}</span>
-                  </div>
-                </article>
-              </li>
-            ))}
+        <div className='todo-body'>
+          <ul className='task-list'>
+            {_toDoList.filter(item => {
+                if (_filter === 'yet') return !item.isDone;
+                if (_filter === 'done') return item.isDone;
+                return true
+              })
+              .map(item => (
+                <li key={item.idx} className='task-item'>
+                  <Task _todoData={item} todoDispatch={todoDispatch} />
+                </li>
+              ))}
           </ul>
         </div>
 
-        <footer>
-          <form onSubmit={handleSubmit}>
+        <footer className='todo-footer'>
+          <form onSubmit={handleAdd}>
             <input type="text" name='todo' className='todo-input' />
             <button type=''>입력</button>
           </form>
@@ -170,3 +102,5 @@ export default function TodoList() {
   );
 }
 
+// const _indexInit = +window.localStorage.getItem('index');
+// const _todoInit = JSON.parse(window.localStorage.getItem('todo'));

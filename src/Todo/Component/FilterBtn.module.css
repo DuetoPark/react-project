@@ -1,0 +1,11 @@
+.filter {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 150ms ease-in-out;
+}
+
+.active {
+  color: red;
+  font-weight: 700;
+}
