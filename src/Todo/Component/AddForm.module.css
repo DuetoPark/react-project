@@ -1,0 +1,32 @@
+:root {
+  --height: 40px;
+  --font-size: 16px;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.input {
+  flex-grow: 1;
+  height: var(--height);
+  padding: 0 8px;
+  border-radius: 4px;
+  background-color: #fff;
+  color: var(--color-purple);
+  caret-color: var(--color-purple);
+  font-size: var(--font-size);
+  font-weight: 500;
+}
+
+.submit-btn {
+  height: var(--height);
+  padding: 0 16px;
+  border-radius: 4px;
+  color: #fff;
+  background-color: var(--color-purple);
+  font-size: var(--font-size);
+  font-weight: 900;
+}

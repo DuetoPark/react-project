@@ -3,6 +3,7 @@ import '../../src/assets/css/Todo/todo.css';
 import FilterBtn from './Component/FilterBtn';
 import Task from './Component/Task';
 import todoReducer from '../Reducer/todoReducer';
+import AddForm from './Component/AddForm';
 
 export default function TodoList() {
   /**
@@ -25,24 +26,6 @@ export default function TodoList() {
 
   const [_toDoList, todoDispatch] = useReducer(todoReducer, []);
 
-  const handleAdd = (e) => {
-    e.preventDefault();
-
-    const $todoInput = document.forms[0].querySelector('.todo-input');
-    const _content = $todoInput.value;
-
-    if (_content.trim() === '') return;
-
-    // _idx 변경
-    setIndex(prev => prev + 1);
-
-    // _toDoList 변경
-    todoDispatch({type: 'added', _id: _index, _content, _isDone: false});
-
-    // .todo-input 초기화
-    $todoInput.value = '';
-  };
-
   const handleReset = () => {
     todoDispatch({type: 'reset'});
     setIndex(1);
@@ -60,8 +43,11 @@ export default function TodoList() {
           <div className='control-group'>
             <div className='left-box'>
               {_taskType.map(_item => (
-                <FilterBtn filterData={_item} _selectValue={_filter}
-              setFilter={setFilter} />
+                <FilterBtn
+                  filterData={_item}
+                  _selectValue={_filter}
+                  setFilter={setFilter}
+                />
               ))}
             </div>
             
@@ -78,7 +64,8 @@ export default function TodoList() {
 
         <div className='todo-body'>
           <ul className='task-list'>
-            {_toDoList.filter(item => {
+            {
+              _toDoList.filter(item => {
                 if (_filter === 'yet') return !item.isDone;
                 if (_filter === 'done') return item.isDone;
                 return true
@@ -87,15 +74,17 @@ export default function TodoList() {
                 <li key={item.idx} className='task-item'>
                   <Task _todoData={item} todoDispatch={todoDispatch} />
                 </li>
-              ))}
+              ))
+            }
           </ul>
         </div>
 
         <footer className='todo-footer'>
-          <form onSubmit={handleAdd}>
-            <input type="text" name='todo' className='todo-input' />
-            <button type=''>입력</button>
-          </form>
+          <AddForm 
+            _index={_index}
+            setIndex={setIndex}
+            todoDispatch={todoDispatch}
+          />
         </footer>
       </section>
     </div>
