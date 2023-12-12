@@ -2,15 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import TodoList from './Todo/TodoList';
+import Welcome from './Layout/Welcome';
+import Header from './Layout/Header';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <Link to='/todo'><li>투두 리스트</li></Link>
+      <Header />
+
       <Routes>
+        <Route path='/' element={<Welcome />}></Route>
         <Route path='/todo' element={<TodoList/>}></Route>
       </Routes>
     </BrowserRouter>
