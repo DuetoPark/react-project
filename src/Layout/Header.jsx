@@ -12,7 +12,7 @@ export default function Header() {
     {address: 'todo', text: '투두 리스트', icon: <FcTodoList />},
   ];
 
-  const [_curPage, setCurPage] = useState('');
+  const [_curPage, setCurPage] = useState(document.location.pathname.slice(1));
 
   return (
     <header className='global-header'>
