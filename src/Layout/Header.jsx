@@ -12,10 +12,11 @@ export default function Header() {
 
   const [_curPage, setCurPage] = useState('');
 
+
   return (
     <header className={styles.header}>
-      <Wrapper>
-        <div className={styles.wrapper}>
+      <Wrapper extraStyle={styles.wrapper}>
+        <div className='left-box'>
           <ul className={styles.list}>
             {_pages.map(({address, text, icon}) => (
               <li key={text} className={styles.menu}>
@@ -23,10 +24,10 @@ export default function Header() {
                   className={`${styles.link} ${_curPage === address && styles['is-active']}`}
                   to={`/${address}`}
                   onClick={() => {setCurPage(address)}}
-                >{icon} {text}</Link>
+                  >{icon} {text}</Link>
               </li>
               )
-            )}
+              )}
           </ul>
         </div>
       </Wrapper>
