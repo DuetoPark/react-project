@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from '../assets/css/Layout/wrapper.module.css';
+import '../assets/css/Layout/wrapper.css';
 
-export default function Wrapper({children}) {
+export default function Wrapper({children, extraStyle}) {
   return (
-    <div className={styles.wrapper}>
+    <div className={`wrapper ${extraStyle || ''}`}>
       {children}
     </div>
   );
