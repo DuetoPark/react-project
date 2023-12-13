@@ -1,5 +1,6 @@
 @import url('assets/css/base/normalize.css');
 @import url('assets/css/base/reset.css');
+@import url('assets/css/base/global.css');
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

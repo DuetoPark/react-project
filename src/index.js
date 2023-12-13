@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -8,7 +8,6 @@ import Welcome from './Layout/Welcome';
 import Header from './Layout/Header';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
 
 root.render(
   <React.StrictMode>
