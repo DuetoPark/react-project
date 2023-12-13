@@ -4,6 +4,9 @@ import FilterBtn from './Component/FilterBtn';
 import Task from './Component/Task';
 import todoReducer from '../Reducer/todoReducer';
 import AddForm from './Component/AddForm';
+import Wrapper from '../Layout/Wrapper';
+import { FcDataBackup, FcLandscape, FcNightLandscape } from "react-icons/fc";
+
 
 export default function TodoList() {
   /**
@@ -35,10 +38,10 @@ export default function TodoList() {
   }, []);
 
   return (
-    <div className={_darkMode ? ' dark-mode' : ''}>
-      <section className='todo'>
+    <Wrapper>
+      <section className={`todo`}>
         <header className='todo-header'>
-          <h1 className='todo-title'>멋쟁이들만 쓸 수 있는 오늘의 할 일 🤔</h1>
+          <h1 className='todo-title'>멋쟁이들만 쓸 수 있는 오늘의 할 일</h1>
 
           <div className='control-group'>
             <div className='left-box'>
@@ -52,12 +55,16 @@ export default function TodoList() {
             </div>
             
             <div className='right-box'>
-              <label>
-                <input type="checkbox" onChange={(e) => {setDarkMode(prev => !prev)}} />
-                <span>{_darkMode ? '라이트모드' : '다크모드'}</span>
+              <label className='icon-btn btn-mode'>
+                <input
+                  className='visually-hidden'
+                  type="checkbox"
+                  onChange={(e) => {setDarkMode(prev => !prev)}}
+                />
+                {_darkMode ? <FcLandscape title='라이트 모드' /> : <FcNightLandscape title='다크 모드'/>}
               </label>
-              
-              <button type='button' onClick={handleReset}>초기화</button>
+
+              <button className='icon-btn' type='button' onClick={handleReset}><FcDataBackup /></button>
             </div>
           </div>
         </header>
@@ -87,7 +94,7 @@ export default function TodoList() {
           />
         </footer>
       </section>
-    </div>
+    </Wrapper>
   );
 }
 

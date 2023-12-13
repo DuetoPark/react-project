@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import styles from './Task.module.css';
+import { FcCheckmark, FcFullTrash, FcLikePlaceholder } from "react-icons/fc";
 
 export default function Task({_todoData, todoDispatch}) {
   const $task = useRef(null);
@@ -44,16 +45,17 @@ export default function Task({_todoData, todoDispatch}) {
           type='button'
           className='task-delete'
           onClick={handleDelete}>
-          지우기
+          <FcFullTrash />
         </button>
-        
+
         <label>
           <input
             ref={$doneCheckbox}
             type='checkbox'
+            className='visually-hidden'
             defaultChecked={_todoData.isDone}
             onChange={handleDone} />
-          <span>{_todoData.isDone ? '취소' : '완료'}</span>
+          <span>{_todoData.isDone ? <FcCheckmark /> : <FcLikePlaceholder />}</span>
         </label>
       </div>
     </article>
