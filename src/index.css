@@ -19,4 +19,17 @@ code {
 
   --color-green: #00ffc3;
   --color-green-dark: #00deaa;
+
+
+  /* gray scale */
+  --color-black: #000;
+  --color-dark: #333;
+  --color-primary: #555;
+  --color-tertiary: #777;
+
+  --color-gray: #aaa;
+  --color-gray-dark: #ccc;
+  --color-border: #ddd;
+  --color-background: #efefef;
+  --color-white: #fff;
 }

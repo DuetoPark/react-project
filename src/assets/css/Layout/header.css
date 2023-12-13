@@ -1,0 +1,55 @@
+.global-header {
+  position: sticky;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  background-color: #fff;
+}
+
+.global-header .wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.global-menu-list {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.global-menu-link {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+  padding: 8px;
+  white-space: nowrap;
+  font-size: 14px;
+  color: var(--color-dark);
+  transition: all 150ms ease-in-out;
+}
+
+.global-menu-link:hover {
+  color: var(--color-gray);
+}
+
+.global-menu-link.is-active {
+  font-weight: 700;
+  color: var(--color-purple) !important;
+}
+
+/* 다크모드 */
+.app:has(#dark-mode),
+.app:has(#dark-mode) .global-header {
+  background-color: var(--color-dark);
+}
+
+.app:has(#dark-mode) .global-menu-link {
+  color: var(--color-white);
+}
+
+.app:has(#dark-mode) .global-menu-link:hover {
+  color: var(--color-border);
+}

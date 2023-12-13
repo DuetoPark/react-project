@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import styles from '../assets/css/Layout/header.module.css';
+import '../assets/css/Layout/header.css';
 import Wrapper from './Wrapper';
 import { FcHome, FcTodoList } from "react-icons/fc";
+import ThemeBtn from '../Todo/Component/ThemeBtn';
+import DarkModeProvider from '../Context/DarkModeContext';
 
 export default function Header() {
   const _pages = [
@@ -12,16 +14,15 @@ export default function Header() {
 
   const [_curPage, setCurPage] = useState('');
 
-
   return (
-    <header className={styles.header}>
-      <Wrapper extraStyle={styles.wrapper}>
+    <header className='global-header'>
+      <Wrapper>
         <div className='left-box'>
-          <ul className={styles.list}>
+          <ul className='global-menu-list'>
             {_pages.map(({address, text, icon}) => (
-              <li key={text} className={styles.menu}>
+              <li key={text} className='global-menu-list'>
                 <Link 
-                  className={`${styles.link} ${_curPage === address && styles['is-active']}`}
+                  className={`global-menu-link${_curPage === address ? ' is-active' : ''}`}
                   to={`/${address}`}
                   onClick={() => {setCurPage(address)}}
                   >{icon} {text}</Link>
@@ -29,6 +30,12 @@ export default function Header() {
               )
               )}
           </ul>
+        </div>
+
+        <div className='right-box'>
+          <DarkModeProvider>
+            <ThemeBtn />
+          </DarkModeProvider>
         </div>
       </Wrapper>
     </header>

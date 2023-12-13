@@ -7,7 +7,7 @@ import Header from './Layout/Header';
 export default function App() {
   
   return (
-    <>
+    <div className='app' style={{height: '100vh'}}>
       <BrowserRouter>
       <Header />
 
@@ -16,7 +16,7 @@ export default function App() {
         <Route path='/todo' element={<TodoList/>}></Route>
       </Routes>
     </BrowserRouter> 
-    </>
+    </div>
   );
 }
 
