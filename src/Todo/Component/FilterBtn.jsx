@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './FilterBtn.module.css';
+import './FilterBtn.css';
 
 export default function FilterBtn({filterData, _selectValue, setFilter}) {
   const handleFilter = (e) => {
@@ -8,7 +8,7 @@ export default function FilterBtn({filterData, _selectValue, setFilter}) {
 
   return (
     <button
-      className={styles.filter + (_selectValue === filterData.type ? ` ${styles.active}` : '')}
+      className={'btn-filter' + (_selectValue === filterData.type ? ' is-active' : '')}
       type='button'
       data-value={filterData.type}
       onClick={handleFilter}

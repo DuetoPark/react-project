@@ -1,0 +1,24 @@
+.btn-filter {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-primary);
+  transition: all 150ms ease-in-out;
+}
+
+.btn-filter:hover {
+  color: var(--color-gray);
+}
+
+.btn-filter.is-active {
+  color: var(--color-purple) !important;
+  font-weight: 700;
+}
+
+.app:has(#dark-mode) .btn-filter {
+  color: var(--color-white);
+}
+
+.app:has(#dark-mode) .btn-filter:hover {
+  color: var(--color-border);
+}
