@@ -14,7 +14,7 @@ export default function AddForm({_index, setIndex, todoDispatch}) {
     setIndex(prev => prev + 1);
 
     // _toDoList 변경
-    todoDispatch({type: 'added', _id: _index, _content, _isDone: false});
+    todoDispatch({type: 'added', _id: _index, _content: _content.trim(), _isDone: false});
 
     // .todo-input 초기화
     $input.current.value = '';
@@ -27,6 +27,7 @@ export default function AddForm({_index, setIndex, todoDispatch}) {
         type="text"
         name='todo'
         className={styles.input}
+        placeholder='✨ 내 멋진 일과 ✨'
       />
 
       <button type='submit' className={styles['submit-btn']}>입력</button>
