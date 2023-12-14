@@ -39,7 +39,9 @@ export default function Task({_todoData, todoDispatch}) {
           type="text"
           className='task-content'
           defaultValue={_todoData.content}
-          onChange={handleUpdate} />
+          onChange={handleUpdate}
+          placeholder='🙉 악 일정이 비어있어요!!!'
+          />
       </div>
 
       <div className='btn-box'>

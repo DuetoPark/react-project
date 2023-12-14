@@ -21,6 +21,10 @@
   font-weight: 500;
 }
 
+.input::placeholder {
+  color: var(--color-tertiary);
+}
+
 .submit-btn {
   height: var(--height);
   padding: 0 16px;

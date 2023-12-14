@@ -28,6 +28,10 @@
   transition: all 150ms ease-in-out;
 }
 
+.task-content::placeholder {
+  color: var(--color-tertiary);
+}
+
 .task-content:focus {
   background-color: var(--color-white);
 }
