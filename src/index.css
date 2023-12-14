@@ -25,7 +25,9 @@ code {
   --color-black: #000;
   --color-dark: #333;
   --color-primary: #555;
-  --color-tertiary: #777;
+  --color-secondary: #777;
+  --color-tertiary: #999;
+
 
   --color-gray: #aaa;
   --color-gray-dark: #ccc;

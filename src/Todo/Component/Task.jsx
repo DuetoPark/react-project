@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import styles from './Task.module.css';
+import './Task.css';
 import { FcCheckmark, FcFullTrash, FcLikePlaceholder } from "react-icons/fc";
 
 export default function Task({_todoData, todoDispatch}) {
@@ -30,32 +30,40 @@ export default function Task({_todoData, todoDispatch}) {
   return (
     <article
       ref={$task}
-      className={`task ${styles.task}`}
+      className={`task ${_todoData.isDone ? 'is-done' : ''}`}
       id={_todoData.idx}
     >
-      <input
-        ref={$content}
-        type="text"
-        className={`task-content ${styles.content}`}
-        defaultValue={_todoData.content}
-        onChange={handleUpdate} />
-      
-      <div>
+      <div className='input-box'>
+        <input
+          ref={$content}
+          type="text"
+          className='task-content'
+          defaultValue={_todoData.content}
+          onChange={handleUpdate} />
+      </div>
+
+      <div className='btn-box'>
         <button
           type='button'
-          className='task-delete'
+          className='task-delete icon-btn'
+          title='삭제하기'
           onClick={handleDelete}>
           <FcFullTrash />
         </button>
 
-        <label>
+        <label className='icon-btn'>
           <input
             ref={$doneCheckbox}
             type='checkbox'
             className='visually-hidden'
             defaultChecked={_todoData.isDone}
             onChange={handleDone} />
-          <span>{_todoData.isDone ? <FcCheckmark /> : <FcLikePlaceholder />}</span>
+          
+          {
+            _todoData.isDone
+              ? <FcCheckmark title='되돌리기' />
+              : <FcLikePlaceholder title='완료' />
+            }
         </label>
       </div>
     </article>

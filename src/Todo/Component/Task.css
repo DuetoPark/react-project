@@ -1,0 +1,81 @@
+.task {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 150ms ease-in-out;
+}
+
+.task:hover {
+  background-color: var(--color-border);
+}
+
+.input-box {
+  flex-grow: 1;
+}
+
+.task-content {
+  flex-grow: 1;
+  width: 100%;
+  height: 40px;
+  padding: 0 8px;
+  border-radius: 4px;
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-primary);
+  transition: all 150ms ease-in-out;
+}
+
+.task-content:focus {
+  background-color: var(--color-white);
+}
+
+.task.is-done .task-content {
+  text-decoration: line-through;
+  color: var(--color-purple) !important;
+}
+
+.btn-box {
+  flex-grow: 0;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  border-radius: 100%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
+}
+
+.icon-btn:hover {
+  background-color: var(--color-gray-dark);
+}
+
+
+/* 다크모드 */
+.app:has(#dark-mode) .task:hover {
+  background-color: var(--color-primary);
+}
+
+.app:has(#dark-mode) .task-content {
+  color: var(--color-white);
+}
+
+.app:has(#dark-mode) .task-content:focus {
+  background-color: var(--color-tertiary);
+}
+
+.app:has(#dark-mode) .icon-btn:hover {
+  background-color: var(--color-tertiary);
+}
