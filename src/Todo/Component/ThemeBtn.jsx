@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { FcLandscape, FcNightLandscape } from "react-icons/fc";
-import { DarkModeContext } from '../../Context/DarkModeContext';
+import { useDarkModeContext } from '../../Context/DarkModeContext';
 import './ThemeBtn.css';
 
 export default function ThemeBtn() {
-  const {_darkMode, toggleMode} = useContext(DarkModeContext);
+  const {_darkMode, toggleMode} = useDarkModeContext();
 
   return (
     <label className='btn-wrapper'>

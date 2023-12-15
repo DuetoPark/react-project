@@ -4,7 +4,6 @@ import '../assets/css/Layout/header.css';
 import Wrapper from './Wrapper';
 import { FcHome, FcTodoList } from "react-icons/fc";
 import ThemeBtn from '../Todo/Component/ThemeBtn';
-import DarkModeProvider from '../Context/DarkModeContext';
 
 export default function Header() {
   const _pages = [
@@ -33,9 +32,7 @@ export default function Header() {
         </div>
 
         <div className='right-box'>
-          <DarkModeProvider>
-            <ThemeBtn />
-          </DarkModeProvider>
+          <ThemeBtn />
         </div>
       </Wrapper>
     </header>
