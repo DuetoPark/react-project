@@ -37,11 +37,7 @@ export default function todoReducer (state, action) {
     case 'deleted': {
       const {_id} = action;
       
-      const _newData = [...state];
-      const _idx = state.findIndex(todo => todo.idx === _id);
-      _newData.splice(_idx, 1);
-
-      return _newData;
+      return [...state].filter(v => v.idx !== _id);
     }
 
     case 'reset': {
