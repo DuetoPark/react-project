@@ -35,3 +35,19 @@ code {
   --color-background: #efefef;
   --color-white: #fff;
 }
+
+/* 🤦‍♀️ 다크모드 🙉 너무나 쉬운 방법 */
+html.dark {
+  --color-black: #000;
+  --color-dark: #333;
+  --color-primary: #555;
+  --color-secondary: #777;
+  --color-tertiary: #999;
+
+
+  --color-gray: #aaa;
+  --color-gray-dark: #ccc;
+  --color-border: #ddd;
+  --color-background: #efefef;
+  --color-white: #fff;
+}
