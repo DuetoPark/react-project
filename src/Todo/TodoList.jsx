@@ -15,10 +15,10 @@ export default function TodoList() {
     {type: 'done', text: '완료한 일'},
   ];
 
-  const [_index, setIndex] = useState(_indexInit);
+  const [_index, setIndex] = useState(() => _indexInit());
   const [_filter, setFilter] = useState('all');
 
-  const [_toDoList, todoDispatch] = useReducer(todoReducer, _todoInit);
+  const [_toDoList, todoDispatch] = useReducer(todoReducer, [], () => _todoInit());
 
   const handleReset = () => {
     todoDispatch({type: 'reset'});
@@ -82,5 +82,8 @@ export default function TodoList() {
   );
 }
 
-const _indexInit = +localStorage.getItem('index') || 1;
-const _todoInit = JSON.parse(window.localStorage.getItem('todo')) || [];
+const _indexInit = () => {return +localStorage.getItem('index') || 1};
+const _todoInit = () => {
+  console.log(123456789);
+  return JSON.parse(window.localStorage.getItem('todo')) || [];
+};
