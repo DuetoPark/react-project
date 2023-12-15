@@ -59,7 +59,9 @@ export default function Task({_todoData, todoDispatch}) {
             type='checkbox'
             className='visually-hidden'
             defaultChecked={_todoData.isDone}
-            onChange={handleDone} />
+            onChange={handleDone} 
+            checked={_todoData.isDone}
+          />
           
           {
             _todoData.isDone
