@@ -1,44 +1,58 @@
-import React, { useEffect, useReducer, useState } from 'react';
-import '../../src/assets/css/Todo/todo.css';
-import FilterBtn from './Component/FilterBtn';
-import Task from './Component/Task';
-import todoReducer from '../Reducer/todoReducer';
-import AddForm from './Component/AddForm';
-import Wrapper from '../Layout/Wrapper';
+import React, { useEffect, useReducer, useState } from "react";
+import "../../src/assets/css/Todo/todo.css";
+import FilterBtn from "./Component/FilterBtn";
+import Task from "./Component/Task";
+import todoReducer from "../Reducer/todoReducer";
+import AddForm from "./Component/AddForm";
+import Wrapper from "../Layout/Wrapper";
 import { FcDataBackup } from "react-icons/fc";
-
+import { Link, useParams } from "react-router-dom";
 
 export default function TodoList() {
   const _taskType = [
-    {type: 'all', text: '전체'},
-    {type: 'yet', text: '해야할 일'},
-    {type: 'done', text: '완료한 일'},
+    { type: "all", text: "전체" },
+    { type: "yet", text: "해야할 일" },
+    { type: "done", text: "완료한 일" },
   ];
 
   const [_index, setIndex] = useState(() => _indexInit());
-  const [_filter, setFilter] = useState('all');
+  const [_filter, setFilter] = useState("all");
 
-  const [_toDoList, todoDispatch] = useReducer(todoReducer, [], () => _todoInit());
+  const [_toDoList, todoDispatch] = useReducer(todoReducer, [], () =>
+    _todoInit()
+  );
 
   const handleReset = () => {
-    todoDispatch({type: 'reset'});
+    todoDispatch({ type: "reset" });
     setIndex(1);
-  }
+  };
 
   useEffect(() => {
-    localStorage.setItem('index', _index);
-    localStorage.setItem('todo', JSON.stringify(_toDoList));
+    localStorage.setItem("index", _index);
+    localStorage.setItem("todo", JSON.stringify(_toDoList));
   }, [_toDoList, _index]);
 
-  return (
-    <Wrapper extraStyle='todo-wrapper'>
-      <section className='todo'>
-        <header className='todo-header'>
-          <h1 className='todo-title'>멋쟁이들만 쓸 수 있는 오늘의 할 일</h1>
+  // const { todoId } = useParams();
 
-          <div className='control-group'>
-            <div className='left-box'>
-              {_taskType.map(_item => (
+  return (
+    <Wrapper extraStyle="todo-wrapper">
+      {/* <aside className="date">
+        <h2 className="visually-hidden">날짜</h2>
+
+        <p>{todoId}</p>
+        <nav>
+          <Link to="/todo/123">123</Link>
+          <Link to="/todo/456">456</Link>
+          <Link to="/todo/789">789</Link>
+        </nav>
+      </aside> */}
+      <section className="todo">
+        <header className="todo-header">
+          <h1 className="todo-title">멋쟁이들만 쓸 수 있는 오늘의 할 일</h1>
+
+          <div className="control-group">
+            <div className="left-box">
+              {_taskType.map((_item) => (
                 <FilterBtn
                   filterData={_item}
                   _selectValue={_filter}
@@ -46,32 +60,33 @@ export default function TodoList() {
                 />
               ))}
             </div>
-            
-            <div className='right-box'>
-              <button className='' type='button' onClick={handleReset}><FcDataBackup /></button>
+
+            <div className="right-box">
+              <button className="" type="button" onClick={handleReset}>
+                <FcDataBackup />
+              </button>
             </div>
           </div>
         </header>
 
-        <div className='todo-body'>
-          <ul className='task-list'>
-            {
-              _toDoList.filter(item => {
-                if (_filter === 'yet') return !item.isDone;
-                if (_filter === 'done') return item.isDone;
-                return true
+        <div className="todo-body">
+          <ul className="task-list">
+            {_toDoList
+              .filter((item) => {
+                if (_filter === "yet") return !item.isDone;
+                if (_filter === "done") return item.isDone;
+                return true;
               })
               .map((item, index) => (
-                <li key={item.idx} className='task-item'>
+                <li key={item.idx} className="task-item">
                   <Task _todoData={item} todoDispatch={todoDispatch} />
                 </li>
-              ))
-            }
+              ))}
           </ul>
         </div>
 
-        <footer className='todo-footer'>
-          <AddForm 
+        <footer className="todo-footer">
+          <AddForm
             _index={_index}
             setIndex={setIndex}
             todoDispatch={todoDispatch}
@@ -82,8 +97,10 @@ export default function TodoList() {
   );
 }
 
-const _indexInit = () => {return +localStorage.getItem('index') || 1};
+const _indexInit = () => {
+  return +localStorage.getItem("index") || 1;
+};
 const _todoInit = () => {
   console.log(123456789);
-  return JSON.parse(window.localStorage.getItem('todo')) || [];
+  return JSON.parse(window.localStorage.getItem("todo")) || [];
 };
